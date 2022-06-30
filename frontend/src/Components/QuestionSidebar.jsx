@@ -13,7 +13,7 @@ const QuestionSidebar = (props) => {
             <div
                 className="my-2 ms-4 me-0"
                 id='questionDiv'
-                style={{ display: 'block', overflowY: 'auto' }}
+                style={{ overflowY: 'auto' }}
                 dangerouslySetInnerHTML={{ __html: props.htmlToRender }}>
             </div>
         </div>

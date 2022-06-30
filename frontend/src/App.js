@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import AnswerInput from './Components/AnswerInput';
 import BottomControls from './Components/BottomControls';
@@ -47,8 +47,17 @@ function App() {
   </ul>`);
   const [answerValue, setAnswerValue] = useState(`#include<iostream>\nint main() {\nint a, b;\ncout<<a+b<<endl;\nreturn 0;\n}`);
   const [outputValue, setOutputValue] = useState(`/tmp/ccJiZokm.o: In function 'main':conepainting.c:(.text+0x63): undefined reference to 'sqrt'\ncollect2: ld returned 1 exit status`);
+  const [language, setLanguage] = useState("cpp");
 
   const handleAnswerChange = event => setAnswerValue(event.target.value);
+
+  const handleOnselect = event => setLanguage(event.target.value);
+
+  const handleCodeRun = event => {
+    console.log("Running Code");
+    console.log(answerValue);
+    console.log(language);
+  }
 
   return (
     <div>
@@ -59,7 +68,7 @@ function App() {
           <div className="m-2 ms-0" style={{ height: `calc(100vh - 80px)` }}>
             <AnswerInput answer={answerValue} handleAnswerChange={handleAnswerChange} />
             <Output output={outputValue} />
-            <BottomControls />
+            <BottomControls handleOnselect={handleOnselect} handleCodeRun={handleCodeRun} />
           </div>
         </div>
       </div>
