@@ -11,11 +11,14 @@ def index(request):
 
 @api_view(['POST'])
 def runCode(request):
-    language = request.POST["language"]
+    print(request.data)
+    language = request.data.get("language")
+    print("L=",language)
     if language != "c" and language != "cpp" and language != "py":
+        print("Sending")
         return Response({"error": "Language Not Supported! Bad Request!"}, status=status.HTTP_400_BAD_REQUEST)
-    program = request.POST["program"]
-    path = "./programs/"
+    program = request.data.get("program")
+    path = "programs/"
     programName = uuid.uuid4()
     fullProgramPath = f"{path}{programName}"
     if language == 'c':

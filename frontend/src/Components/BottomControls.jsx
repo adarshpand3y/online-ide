@@ -4,7 +4,7 @@ const BottomControls = (props) => {
     return (
         <div className="mt-2" style={{ height: '10%' }}>
             <div className="d-flex justify-content-between">
-                <select className="form-select form-select-sm" aria-label="Select Language" onChange={props.handleOnselect} style={{width: '50%'}} defaultValue={"cpp"}>
+                <select className="form-select form-select-sm" aria-label="Select Language" onChange={props.handleOnselect} style={{width: '50%'}} defaultValue={"c"}>
                     <option value="n/a">Select Language</option>
                     <option value="c">C</option>
                     <option value="cpp">C++</option>
