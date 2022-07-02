@@ -10,7 +10,7 @@ const BottomControls = (props) => {
                     <option value="cpp">C++</option>
                     <option value="py">Python</option>
                 </select>
-                <button className="btn btn-primary" onClick={props.handleCodeRun}>Run &#38; Submit Code!</button>
+                <button className="btn btn-secondary" onClick={props.handleCodeRun}>Run &#38; Submit Code!</button>
             </div>
         </div>
     )

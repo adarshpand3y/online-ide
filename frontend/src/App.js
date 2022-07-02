@@ -46,7 +46,7 @@ function App() {
       </li>
   </ul>`);
   const [answerValue, setAnswerValue] = useState(`#include<stdio.h>\nint main() {\nprintf("Hello World\\n");\nreturn 0;\n}`);
-  const [outputValue, setOutputValue] = useState(`/tmp/ccJiZokm.o: In function 'main':conepainting.c:(.text+0x63): undefined reference to 'sqrt'\ncollect2: ld returned 1 exit status`);
+  const [outputValue, setOutputValue] = useState(`Your output will be shown here.`);
   const [language, setLanguage] = useState("c");
 
   const handleAnswerChange = event => setAnswerValue(event.target.value);
@@ -58,9 +58,7 @@ function App() {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        // 'Content-Type': 'multipart/form-data'
         'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify({"language": language, "program": answerValue})
     });
@@ -71,7 +69,7 @@ function App() {
   return (
     <div>
       <Navbar />
-      <div className="row" style={{ width: '100%', height: '100%' }}>
+      <div className="row text-white" style={{ width: '100%', height: '100%' }}>
         <QuestionSidebar htmlToRender={questionHtml} />
         <div className="col-md-7">
           <div className="m-2 ms-0" style={{ height: `calc(100vh - 80px)` }}>

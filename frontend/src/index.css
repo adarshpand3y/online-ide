@@ -11,3 +11,39 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+body {
+  background-color: #202020;
+}
+
+textarea {
+  background-color: #302f2f !important;
+  color: #fff !important;
+}
+
+select, option {
+  background-color: #202020 !important;
+  color: #fff !important;
+}
+
+/* SCROLLBAR MODIFICATION CSS */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #302f2f;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #777;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
