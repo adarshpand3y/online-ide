@@ -2,7 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import subprocess
 from rest_framework import status
-import os, uuid
+import os, uuid, shutil
 
 # Create your views here.
 @api_view(['GET'])
@@ -11,11 +11,8 @@ def index(request):
 
 @api_view(['POST'])
 def runCode(request):
-    print(request.data)
     language = request.data.get("language")
-    print("L=",language)
-    if language != "c" and language != "cpp" and language != "py":
-        print("Sending")
+    if language != "c" and language != "cpp" and language != "py" and language != "java":
         return Response({"error": "Language Not Supported! Bad Request!"}, status=status.HTTP_400_BAD_REQUEST)
     program = request.data.get("program")
     path = "programs/"
@@ -23,7 +20,6 @@ def runCode(request):
     fullProgramPath = f"{path}{programName}"
     if language == 'c':
         fullProgramPath += ".c"
-        print(fullProgramPath)
         f = open(fullProgramPath, "w")
         f.write(program)
         f.close()
@@ -59,4 +55,18 @@ def runCode(request):
         else:
             output = s.stderr
         os.remove(fullProgramPath)
+        return Response({"language": language, "output": output})
+    if language == 'java':
+        output = "Java Found!"
+        folderName = f"a{uuid.uuid4()}a"
+        os.makedirs(f"./programs/{folderName}")
+        f = open(f"./programs/{folderName}/Solution.java", "w")
+        f.write(program)
+        f.close()
+        s = subprocess.run(f"cd programs/{folderName} && javac Solution.java && java Solution", shell = True, capture_output=True, text=True)
+        if s.returncode == 0:
+            output = s.stdout
+        else:
+            output = s.stderr
+        shutil.rmtree(f"./programs/{folderName}")
         return Response({"language": language, "output": output})
