@@ -48,6 +48,19 @@ function App() {
   const [answerValue, setAnswerValue] = useState(`#include<stdio.h>\nint main() {\nprintf("Hello World\\n");\nreturn 0;\n}`);
   const [outputValue, setOutputValue] = useState(`Your output will be shown here.`);
   const [language, setLanguage] = useState("c");
+  const [tab, setTab] = useState("o");
+  const [customInput, setCustomInput] = useState("")
+
+  const toggleTab = (event) => {
+    if(tab === "o") {
+      setTab("i");
+    }
+    else {
+      setTab("o");
+    }
+  }
+
+  const handleCustomInputChange = event => setCustomInput(event.target.value);
 
   const handleAnswerChange = event => setAnswerValue(event.target.value);
 
@@ -74,8 +87,8 @@ function App() {
         <div className="col-md-7">
           <div className="m-2 ms-0" style={{ height: `calc(100vh - 80px)` }}>
             <AnswerInput answer={answerValue} handleAnswerChange={handleAnswerChange} />
-            <Output output={outputValue} />
-            <BottomControls handleOnselect={handleOnselect} handleCodeRun={handleCodeRun} />
+            <Output output={outputValue} tab={tab} customInput={customInput} handleCustomInputChange={handleCustomInputChange} />
+            <BottomControls handleOnselect={handleOnselect} handleCodeRun={handleCodeRun} toggleTab={toggleTab} tab={tab} />
           </div>
         </div>
       </div>
