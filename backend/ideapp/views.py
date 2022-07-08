@@ -14,6 +14,7 @@ def runCode(request):
     language = request.data.get("language")
     if language != "c" and language != "cpp" and language != "py" and language != "java":
         return Response({"error": "Language Not Supported! Bad Request!"}, status=status.HTTP_400_BAD_REQUEST)
+    op = "6\n0\n35\n0\n"
     program = request.data.get("program")
     path = "programs/"
     programName = uuid.uuid4()
@@ -36,9 +37,13 @@ def runCode(request):
         f = open(fullProgramPath, "w")
         f.write(program)
         f.close()
-        s = subprocess.run(f"g++ {fullProgramPath} -o {fullProgramPath[:-4]}.out && {fullProgramPath[:-4]}.out", shell = True, capture_output=True, text=True)
+        s = subprocess.run(f"g++ {fullProgramPath} -o {fullProgramPath[:-4]}.out && {fullProgramPath[:-4]}.out < ./ideapp/ip.txt", shell = True, capture_output=True, text=True)
         if s.returncode == 0:
             output = s.stdout
+            if output == op:
+                print("Correct Output")
+            else:
+                print("Incorrect Output")
             os.remove(f"{fullProgramPath[:-4]}.out")
         else:
             output = s.stderr
