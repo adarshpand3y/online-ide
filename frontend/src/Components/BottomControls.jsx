@@ -11,8 +11,12 @@ const BottomControls = (props) => {
                     <option value="py">Python</option>
                     <option value="java">Java</option>
                 </select>
-                <button className="btn btn-secondary" onClick={props.toggleTab}>Show {props.tab==="i"?"Output":"Input"}</button>
-                <button className="btn btn-secondary" onClick={props.handleCodeRun}>Run &#38; Submit Code!</button>
+                {/* <button className="btn btn-secondary" onClick={props.toggleTab}>Show {props.tab === "i" ? "Output" : "Input"}</button> */}
+                <div className="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" className={`btn btn-${props.tab==="o"?"outline-":""}secondary`} onClick={() => props.toggleToInput()}>Input</button>
+                    <button type="button" className={`btn btn-${props.tab==="i"?"outline-":""}secondary`} onClick={() => props.toggleToOutput()}>Output</button>
+                </div>
+                <button className="btn btn-secondary" onClick={props.handleCodeRun}>Run Code!</button>
             </div>
         </div>
     )

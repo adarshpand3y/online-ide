@@ -51,14 +51,8 @@ function App() {
   const [tab, setTab] = useState("o");
   const [customInput, setCustomInput] = useState("")
 
-  const toggleTab = (event) => {
-    if(tab === "o") {
-      setTab("i");
-    }
-    else {
-      setTab("o");
-    }
-  }
+  const toggleToInput = (event) => setTab("i");
+  const toggleToOutput = (event) => setTab("o");
 
   const handleCustomInputChange = event => setCustomInput(event.target.value);
 
@@ -88,7 +82,7 @@ function App() {
           <div className="m-2 ms-0" style={{ height: `calc(100vh - 80px)` }}>
             <AnswerInput answer={answerValue} handleAnswerChange={handleAnswerChange} />
             <Output output={outputValue} tab={tab} customInput={customInput} handleCustomInputChange={handleCustomInputChange} />
-            <BottomControls handleOnselect={handleOnselect} handleCodeRun={handleCodeRun} toggleTab={toggleTab} tab={tab} />
+            <BottomControls handleOnselect={handleOnselect} handleCodeRun={handleCodeRun} toggleToInput={toggleToInput} toggleToOutput={toggleToOutput} tab={tab} />
           </div>
         </div>
       </div>
