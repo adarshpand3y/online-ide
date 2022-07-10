@@ -24,9 +24,13 @@ def runCode(request):
         f = open(fullProgramPath, "w")
         f.write(program)
         f.close()
-        s = subprocess.run(f"gcc {fullProgramPath} -o {fullProgramPath[:-2]}.out && {fullProgramPath[:-2]}.out", shell = True, capture_output=True, text=True)
+        s = subprocess.run(f"gcc {fullProgramPath} -o {fullProgramPath[:-2]}.out && {fullProgramPath[:-2]}.out < ./ideapp/ip.txt", shell = True, capture_output=True, text=True)
         if s.returncode == 0:
             output = s.stdout
+            if output == op:
+                print("Correct Output")
+            else:
+                print("Incorrect Output")
             os.remove(f"{fullProgramPath[:-2]}.out")
         else:
             output = s.stderr
@@ -54,9 +58,13 @@ def runCode(request):
         f = open(fullProgramPath, "w")
         f.write(program)
         f.close()
-        s = subprocess.run(f"python {fullProgramPath}", shell = True, capture_output=True, text=True)
+        s = subprocess.run(f"python {fullProgramPath} < ./ideapp/ip.txt", shell = True, capture_output=True, text=True)
         if s.returncode == 0:
             output = s.stdout
+            if output == op:
+                    print("Correct Output")
+            else:
+                print("Incorrect Output")
         else:
             output = s.stderr
         os.remove(fullProgramPath)
@@ -68,9 +76,13 @@ def runCode(request):
         f = open(f"./programs/{folderName}/Solution.java", "w")
         f.write(program)
         f.close()
-        s = subprocess.run(f"cd programs/{folderName} && javac Solution.java && java Solution", shell = True, capture_output=True, text=True)
+        s = subprocess.run(f"cd programs/{folderName} && javac Solution.java && java Solution  < ../../ideapp/ip.txt", shell = True, capture_output=True, text=True)
         if s.returncode == 0:
             output = s.stdout
+            if output == op:
+                    print("Correct Output")
+            else:
+                print("Incorrect Output")
         else:
             output = s.stderr
         shutil.rmtree(f"./programs/{folderName}")
