@@ -47,6 +47,7 @@ function App() {
   </ul>`);
   const [answerValue, setAnswerValue] = useState(`#include<stdio.h>\nint main() {\nprintf("Hello World\\n");\nreturn 0;\n}`);
   const [outputValue, setOutputValue] = useState(`Your output will be shown here.`);
+  const [answerStatus, setAnswerStatus] = useState(``);
   const [language, setLanguage] = useState("c");
   const [tab, setTab] = useState("o");
   const [customInput, setCustomInput] = useState("")
@@ -71,6 +72,7 @@ function App() {
     });
     const parsedResponse = await response.json();
     setOutputValue(parsedResponse.output);
+    setAnswerStatus(parsedResponse.status);
   }
 
   return (
@@ -81,7 +83,7 @@ function App() {
         <div className="col-md-7">
           <div className="m-2 ms-0" style={{ height: `calc(100vh - 80px)` }}>
             <AnswerInput answer={answerValue} handleAnswerChange={handleAnswerChange} />
-            <Output output={outputValue} tab={tab} customInput={customInput} handleCustomInputChange={handleCustomInputChange} />
+            <Output output={outputValue} tab={tab} customInput={customInput} handleCustomInputChange={handleCustomInputChange} answerStatus={answerStatus} />
             <BottomControls handleOnselect={handleOnselect} handleCodeRun={handleCodeRun} toggleToInput={toggleToInput} toggleToOutput={toggleToOutput} tab={tab} />
           </div>
         </div>

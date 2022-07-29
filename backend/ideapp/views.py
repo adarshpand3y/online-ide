@@ -15,6 +15,7 @@ def runCode(request):
     if language != "c" and language != "cpp" and language != "py" and language != "java":
         return Response({"error": "Language Not Supported! Bad Request!"}, status=status.HTTP_400_BAD_REQUEST)
     op = "6\n0\n35\n0\n"
+    status = "incorrect"
     program = request.data.get("program")
     path = "programs/"
     programName = uuid.uuid4()
@@ -29,6 +30,7 @@ def runCode(request):
             output = s.stdout
             if output == op:
                 print("Correct Output")
+                status = "correct"
             else:
                 print("Incorrect Output")
             os.remove(f"{fullProgramPath[:-2]}.out")
@@ -46,6 +48,7 @@ def runCode(request):
             output = s.stdout
             if output == op:
                 print("Correct Output")
+                status = "correct"
             else:
                 print("Incorrect Output")
             os.remove(f"{fullProgramPath[:-4]}.out")
@@ -63,6 +66,7 @@ def runCode(request):
             output = s.stdout
             if output == op:
                     print("Correct Output")
+                    status = "correct"
             else:
                 print("Incorrect Output")
         else:
@@ -80,10 +84,11 @@ def runCode(request):
         if s.returncode == 0:
             output = s.stdout
             if output == op:
-                    print("Correct Output")
+                print("Correct Output")
+                status = "correct"
             else:
                 print("Incorrect Output")
         else:
             output = s.stderr
         shutil.rmtree(f"./programs/{folderName}")
-        return Response({"language": language, "output": output})
+        return Response({"language": language, "output": output, "status": status})
