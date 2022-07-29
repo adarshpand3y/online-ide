@@ -6,7 +6,7 @@ const Output = (props) => {
             {
                 props.tab === "o" ?
                     <div className="form-floating my-2" style={{ height: '100%' }}>
-                        <textarea tabIndex={-1} className={`form-control ${props.answerStatus==="correct"?"is-valid":"is-invalid"}`} placeholder="Your Output is shown here." id="codeOutput" style={{ height: '100%' }} value={props.output} readOnly></textarea>
+                        <textarea tabIndex={-1} className={`form-control ${props.answerStatus===""?"":props.answerStatus==="correct"?"is-valid":"is-invalid"}`} placeholder="Your Output is shown here." id="codeOutput" style={{ height: '100%' }} value={props.output} readOnly></textarea>
                         <label htmlFor="codeOutput">Your output is shown here</label>
                     </div>
                     :
