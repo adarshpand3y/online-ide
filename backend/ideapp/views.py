@@ -37,7 +37,7 @@ def runCode(request):
         else:
             output = s.stderr
         os.remove(fullProgramPath)
-        return Response({"language": language, "output": output})
+        return Response({"language": language, "output": output, "status": status})
     if language == 'cpp':
         fullProgramPath += ".cpp"
         f = open(fullProgramPath, "w")
@@ -55,7 +55,7 @@ def runCode(request):
         else:
             output = s.stderr
         os.remove(fullProgramPath)
-        return Response({"language": language, "output": output})
+        return Response({"language": language, "output": output, "status": status})
     if language == 'py':
         fullProgramPath += ".py"
         f = open(fullProgramPath, "w")
@@ -72,7 +72,7 @@ def runCode(request):
         else:
             output = s.stderr
         os.remove(fullProgramPath)
-        return Response({"language": language, "output": output})
+        return Response({"language": language, "output": output, "status": status})
     if language == 'java':
         output = "Java Found!"
         folderName = f"a{uuid.uuid4()}a"

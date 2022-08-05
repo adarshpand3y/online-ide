@@ -19,6 +19,7 @@ body {
 textarea {
   background-color: #302f2f !important;
   color: #fff !important;
+  resize: none;
 }
 
 select, option {
