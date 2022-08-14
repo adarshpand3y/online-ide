@@ -10,14 +10,6 @@ import "ace-builds/src-noconflict/ext-language_tools";
 const AnswerInput = (props) => {
     return (
         <div className="form-floating" style={{ height: '60%' }}>
-            {/* <textarea
-                className="form-control"
-                placeholder="Leave a comment here"
-                id="codeInput"
-                style={{ height: '100%' }}
-                value={props.answer}
-                onChange={props.handleAnswerChange}
-            ></textarea> */}
             <AceEditor
                 mode={props.languageFormatting}
                 theme="dracula"
