@@ -51,15 +51,21 @@ function App() {
   const [language, setLanguage] = useState("c");
   const [tab, setTab] = useState("o");
   const [customInput, setCustomInput] = useState("")
+  const [languageMode, setLanguageMode] = useState("c_cpp");
 
   const toggleToInput = (event) => setTab("i");
   const toggleToOutput = (event) => setTab("o");
 
   const handleCustomInputChange = event => setCustomInput(event.target.value);
 
-  const handleAnswerChange = event => setAnswerValue(event.target.value);
+  const handleAnswerChange = event => setAnswerValue(event);
 
-  const handleOnselect = event => setLanguage(event.target.value);
+  const handleOnselect = event => {
+    setLanguage(event.target.value);
+    if(event.target.value == "c" || event.target.value == "cpp") setLanguageMode("c_cpp");
+    else if (event.target.value == "java") setLanguageMode("java");
+    else setLanguageMode("python");
+  };
 
   const handleCodeRun = async (event) => {
     const url = `http://127.0.0.1:8000/api/run`;
@@ -82,7 +88,7 @@ function App() {
         <QuestionSidebar htmlToRender={questionHtml} />
         <div className="col-md-7">
           <div className="m-2 ms-0" style={{ height: `calc(100vh - 80px)` }}>
-            <AnswerInput answer={answerValue} handleAnswerChange={handleAnswerChange} />
+            <AnswerInput answer={answerValue} handleAnswerChange={handleAnswerChange} languageFormatting={languageMode} />
             <Output output={outputValue} tab={tab} customInput={customInput} handleCustomInputChange={handleCustomInputChange} answerStatus={answerStatus} />
             <BottomControls handleOnselect={handleOnselect} handleCodeRun={handleCodeRun} toggleToInput={toggleToInput} toggleToOutput={toggleToOutput} tab={tab} />
           </div>
